@@ -1,10 +1,14 @@
 import React from 'react';
 
-const MovieCard = ({ movie: { imdbID, Year, Poster, Title, Type } }) => {
+const MovieCard = ({ movie: { imdbID, Year, Poster, Title, Type } }, props) => {
+
   return (
     <div className="movie" key={imdbID}>
       <div>
         <p>{Year}</p>
+        <div classname="overlay">
+          add to favourite
+        </div>
       </div>
 
       <div>

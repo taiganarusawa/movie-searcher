@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react'
 
+// git add --a
+// git commit -m "Initial commit"
+// git push 
+
 import './App.css';
 import SearchIcon from './search.svg';
-import MovieCard from './MovieCard';
+import MovieCard from './components/MovieCard';
+import AddFavourites from './components/AddFavourites'
 
 const API_URL = 'http://www.omdbapi.com/?i=tt3896198&apikey=50c8169'
 
 const App = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [movies, setMovies] = useState([]);
+    const [favourites, setFavourites] = useState([]);
 
     useEffect(() => {
         searchMovies("Batman");
@@ -20,6 +26,11 @@ const App = () => {
 
         setMovies(data.Search);
     };
+
+    const addFavouriteMovie = (movie) => {
+        const newFavouriteList = [...favourites, movie];
+        setFavourites(newFavouriteList);
+    }
 
     return(
         <div className = 'app'>
@@ -41,7 +52,11 @@ const App = () => {
             {movies?.length > 0 ? (
                 <div className="container">
                     {movies.map((movie) => (
-                        <MovieCard movie={movie} />
+                        <MovieCard 
+                            movie={movie} 
+                            // add favourite prop
+                            FavouriteComponent={AddFavourites}
+                        />
                     ))}
                 </div>
             ) : (
